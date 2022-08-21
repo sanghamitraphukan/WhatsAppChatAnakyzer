@@ -59,7 +59,7 @@ if uploaded_file is not None:
 
         # activity map
         st.title("Activity Map")
-        col1 , col2 = st.beta_columns(2)
+        col1 , col2, col3 = st.beta_columns(3)
 
         with col1:
             st.header("Most Busy Day ")
@@ -67,6 +67,8 @@ if uploaded_file is not None:
             fig, ax = plt.subplots()
             ax.bar(busy_day.index, busy_day.values, color = '#ff7d00')
             plt.xticks(rotation='vertical')
+            plt.xlabel("Day")
+            plt.ylabel("Users")
             st.pyplot(fig)
 
         with col2:
@@ -75,6 +77,18 @@ if uploaded_file is not None:
             fig, ax = plt.subplots()
             ax.bar(busy_month.index, busy_month.values, color = '#6e0d25')
             plt.xticks(rotation='vertical')
+            plt.xlabel("Month")
+            plt.ylabel("Users")
+            st.pyplot(fig)
+
+        with col3:
+            st.header("Most Busy Hours ")
+            busy_hour = helper.hour_activity_map(selected_user, df)
+            fig, ax = plt.subplots()
+            ax.bar(busy_hour.index, busy_hour.values, color = '#ff7d00')
+            plt.xticks(rotation='vertical')
+            plt.xlabel("Hour")
+            plt.ylabel("Users")
             st.pyplot(fig)
 
         st.title("Weekly Activity Map")
